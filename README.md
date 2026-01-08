@@ -1,40 +1,79 @@
-# Worker-knotew
+This is the enhanced version of the **Worker-knotew** documentation. I have organized the technical components, operational modes, and monitoring metrics into clear tables to make the architectural overview easier to digest.
 
-Worker to process synchronization jobs (Google Drive / GitHub) using Supabase as a queue/token storage and Redis for caching. Exposes Prometheus metrics for monitoring.
+---
 
-## Overview
-- Polls pending jobs in Supabase and processes updates in Google Drive or GitHub.
-- Uses Redis for access token caching.
-- Exports Prometheus metrics to `/metrics` on port 8080.
-- Designed to run in concurrent mode (multiple workers) or isolated mode (one worker per process).
+# **Worker-knotew**
 
-Important files:
+> "High-performance background worker for the Knotew ecosystem."
+> **Scalable synchronization between Google Drive, GitHub, and Supabase.**
 
-- [main.go](/home/grs_s/dev/worker-knotew/main.go) — main entry with multiple workers.
+---
 
-- [packages/worker/main.go](/home/grs_s/dev/worker-knotew/packages/worker/main.go) — concurrent worker loop.
+## 🎯 Overview
 
-- [packages/worker/IsolatedWorker/root/main.go](/home/grs_s/dev/worker-knotew/packages/worker/IsolatedWorker/root/main.go) — isolated mode (single worker).
-- [packages/supa/main.go](/home/grs_s/dev/worker-knotew/packages/supa/main.go) — Supabase abstractions.
-- [packages/redis/main.go](/home/grs_s/dev/worker-knotew/packages/redis/main.go) — Redis client and token cache.
-- [packages/prometheus/main.go](/home/grs_s/dev/worker-knotew/packages/prometheus/main.go) — recorded metrics.
-- [prometheus.yml](/home/grs_s/dev/worker-knotew/prometheus.yml) — Example Prometheus configuration.
+**Worker-knotew** is a specialized Go-based service designed to process intensive synchronization jobs. It functions as a bridge between cloud storage (Google Drive), version control (GitHub), and a central database (Supabase), utilizing Redis for low-latency token caching and Prometheus for real-time health monitoring.
 
-- [docker-compose.yml](/home/grs_s/dev/worker-knotew/docker-compose.yml) — Stack for Prometheus/Grafana and worker (expected image).
+### 🚀 Core Capabilities
 
-Important metrics:
-- [`prometheus.JobExecutionDuration`](packages/prometheus/main.go)
-- [`prometheus.JobsProcessed`](packages/prometheus/main.go)
-- [`prometheus.JobsFailed`](packages/prometheus/main.go)
-- [`prometheus.JobsError`](packages/prometheus/main.go)
-- [`prometheus.IdleIterations`](packages/prometheus/main.go)
-- [`prometheus.MemoryUsageBytes`](packages/prometheus/main.go)
+| Feature | Description |
+| --- | --- |
+| **Job Polling** | Continuously monitors Supabase for pending synchronization tasks. |
+| **Multi-Provider Sync** | Handles updates and data transfers for Google Drive and GitHub. |
+| **Token Caching** | Uses Redis to store and retrieve access tokens, reducing API overhead. |
+| **Observability** | Native Prometheus integration exporting metrics on port `8080`. |
 
-## Roadmap
+---
 
-<div align="center"> 
-    <img width="70%" src="./roadmap.png" >
+## 🛠️ Operational Modes
+
+The worker is architected to be flexible based on infrastructure requirements:
+
+* **Concurrent Mode:** Runs multiple worker loops within a single process for high-throughput environments.
+* **Isolated Mode:** Runs a single worker per process, ideal for microservices or containerized isolation.
+
+---
+
+## 📊 Monitoring & Metrics
+
+Real-time visibility is provided via the `/metrics` endpoint. The following metrics are tracked to ensure system reliability:
+
+| Metric Name | Description |
+| --- | --- |
+| `JobExecutionDuration` | Time taken to complete a single synchronization task. |
+| `JobsProcessed` | Total count of successfully completed jobs. |
+| `JobsFailed` | Count of jobs that failed due to logic or provider issues. |
+| `JobsError` | Count of critical system or network errors. |
+| `IdleIterations` | Tracks how often the worker finds no pending jobs (polling efficiency). |
+| `MemoryUsageBytes` | Real-time RAM consumption of the worker process. |
+
+---
+
+## 🏗️ Architecture & Packages
+
+| Package Path | Responsibility |
+| --- | --- |
+| `packages/worker` | Core concurrent worker loop logic. |
+| `packages/worker/IsolatedWorker` | Logic for running workers in single-instance mode. |
+| `packages/supa` | Supabase abstractions for queue management and token storage. |
+| `packages/redis` | Redis client implementation for high-speed token caching. |
+| `packages/prometheus` | Metric registration and recording logic. |
+
+---
+
+## 🗺️ Roadmap
+
+<div align="center">
+<img width="70%" src="./roadmap.png" alt="Worker-knotew Roadmap">
 </div>
+
+---
+
+## 🔗 Project Context
+
+This worker is a critical component of the **Knotew** platform.
+
+> [!TIP]
+> To see how this worker fits into the larger ecosystem, check the main Knotew repository as soon as it becomes available!
 
 ---
 
