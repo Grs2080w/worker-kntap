@@ -1,7 +1,3 @@
-This is the enhanced version of the **Worker-knotew** documentation. I have organized the technical components, operational modes, and monitoring metrics into clear tables to make the architectural overview easier to digest.
-
----
-
 # **Worker-knotew**
 
 > "High-performance background worker for the Knotew ecosystem."
