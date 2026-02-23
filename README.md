@@ -1,13 +1,13 @@
-# **Worker-knotew**
+# **Worker-kntap**
 
-> "High-performance background worker for the Knotew ecosystem."
+> "High-performance background worker for the Kntap ecosystem."
 > **Scalable synchronization between Google Drive, GitHub, and Supabase.**
 
 ---
 
 ## 🎯 Overview
 
-**Worker-knotew** is a specialized Go-based service designed to process intensive synchronization jobs. It functions as a bridge between cloud storage (Google Drive), version control (GitHub), and a central database (Supabase), utilizing Redis for low-latency token caching and Prometheus for real-time health monitoring.
+**Worker-Kntap** is a specialized Go-based service designed to process intensive synchronization jobs. It functions as a bridge between cloud storage (Google Drive), version control (GitHub), and a central database (Supabase), utilizing Redis for low-latency token caching and Prometheus for real-time health monitoring.
 
 ### 🚀 Core Capabilities
 
@@ -59,20 +59,20 @@ Real-time visibility is provided via the `/metrics` endpoint. The following metr
 ## 🗺️ Roadmap
 
 <div align="center">
-<img width="70%" src="./roadmap.png" alt="Worker-knotew Roadmap">
+<img width="70%" src="./roadmap.png" alt="Worker-Kntap Roadmap">
 </div>
 
 ---
 
 ## 🔗 Project Context
 
-This worker is a critical component of the **Knotew** platform.
+This worker is a critical component of the **Kntap** platform.
 
 > [!TIP]
-> To see how this worker fits into the larger ecosystem, check the main Knotew repository as soon as it becomes available!
+> To see how this worker fits into the larger ecosystem, check the main Kntap repository as soon as it becomes available!
 
 ---
 
 ## Considerations
 
-This worker is made for Knotew, click the link below when it becomes available!
+This worker is made for Kntap, click the link below when it becomes available!
